@@ -15,6 +15,8 @@ import br.com.alura.aluraviagens.dao.PacoteDAO;
 import br.com.alura.aluraviagens.model.Pacote;
 import br.com.alura.aluraviagens.ui.adapter.ListaPacotesAdapter;
 
+import static br.com.alura.aluraviagens.ui.activity.PacoteActivityConstantes.CHAVE_PACOTE;
+
 public class ListaPacotesActivity extends AppCompatActivity {
 
     public static final String TITULO_APPBAR = "Pacotes";
@@ -25,7 +27,6 @@ public class ListaPacotesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_lista_pacotes);
         setTitle(TITULO_APPBAR);
         configuraLista();
-
     }
 
     private void configuraLista() {
@@ -35,9 +36,13 @@ public class ListaPacotesActivity extends AppCompatActivity {
 
         listaDePacotes.setOnItemClickListener((adapterView, view, position, id) -> {
             Pacote pacoteClicado = pacotes.get(position);
-            Intent intent = new Intent(ListaPacotesActivity.this, ResumoPacoteActivity.class);
-            intent.putExtra("pacote", pacoteClicado);
-            startActivity(intent);
+            vaiParaResumoPacote(pacoteClicado);
         });
+    }
+
+    private void vaiParaResumoPacote(Pacote pacoteClicado) {
+        Intent intent = new Intent(ListaPacotesActivity.this, ResumoPacoteActivity.class);
+        intent.putExtra(CHAVE_PACOTE, pacoteClicado);
+        startActivity(intent);
     }
 }
